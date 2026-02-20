@@ -12,5 +12,3 @@ exclude-dependencies = ["pywin32"]
 [tool.uv.extra-build-dependencies]
 isaacsim-kernel = ["wheel-stub"]
 flatdict = ["setuptools<82", "wheel"]
-
-
