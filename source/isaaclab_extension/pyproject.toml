@@ -1,0 +1,33 @@
+[project]
+name = "isaaclab_extension"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+  "setuptools<75",
+  "flatdict==4.0.1",
+  "torch",
+  "torchvision",
+  "isaacsim[all,extscache]==5.1.0",
+  "isaaclab[isaacsim,all]==2.3.0",
+  "pip",
+]
+
+[build-system]
+requires = ["setuptools<82", "wheel", "toml"]
+build-backend = "setuptools.build_meta"
+
+
+[tool.uv.sources]
+isaacsim = { index = "nvidia" }
+isaaclab = { index = "nvidia" }
+
+[[tool.uv.index]]
+name = "nvidia"
+url = "https://pypi.nvidia.com"
+explicit = true
+
+[tool.uv.extra-build-dependencies]
+flatdict = ["setuptools"]
+

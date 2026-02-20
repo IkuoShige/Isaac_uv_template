@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: isaaclab_extension
+Version: 0.1.0
+Summary: Add your description here
+Requires-Python: <3.12,>=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: setuptools<75
+Requires-Dist: flatdict==4.0.1
+Requires-Dist: torch
+Requires-Dist: torchvision
+Requires-Dist: isaacsim[all,extscache]==5.1.0
+Requires-Dist: isaaclab[all,isaacsim]==2.3.0
+Requires-Dist: pip
