@@ -21,7 +21,10 @@ RUN apt-get update && apt-get install -y \
     libxrender-dev \
     libgomp1 \
     libosmesa6-dev \
+    libglu1-mesa \
+    libopengl0 \
     patchelf \
+    xvfb \
     && rm -rf /var/lib/apt/lists/*
 
 # Setup uv
