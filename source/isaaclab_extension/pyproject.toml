@@ -11,6 +11,14 @@ dependencies = [
   "torchvision",
   "isaacsim[all,extscache]==5.1.0",
   "isaaclab[isaacsim,all]==2.3.0",
+  # isaaclab's wheel bundles its sub-packages' source under
+  # site-packages/isaaclab/source/ but does not install them as importable
+  # dists. Pull isaaclab_tasks straight from the matching IsaacLab git tag
+  # (subdirectory build) so `import isaaclab_tasks` works after a plain
+  # `uv sync` — no post-sync editable-install script required.
+  "isaaclab_tasks",
+  # mjviser (MuJoCo-in-viser renderer) pulls mujoco + viser + trimesh.
+  "mjviser",
   "pip",
 ]
 
@@ -22,6 +30,7 @@ build-backend = "setuptools.build_meta"
 [tool.uv.sources]
 isaacsim = { index = "nvidia" }
 isaaclab = { index = "nvidia" }
+isaaclab_tasks = { git = "https://github.com/isaac-sim/IsaacLab.git", subdirectory = "source/isaaclab_tasks", tag = "v2.3.0" }
 
 [[tool.uv.index]]
 name = "nvidia"

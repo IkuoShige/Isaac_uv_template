@@ -1,0 +1,6 @@
+# Never copy the local venv (19GB+) or git history into the build context.
+.venv
+.git
+**/__pycache__
+**/*.pyc
+*.egg-info
