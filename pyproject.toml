@@ -8,6 +8,11 @@ required-environments = [
   "sys_platform == 'linux' and platform_machine == 'x86_64'"
 ]
 exclude-dependencies = ["pywin32"]
+# Isaac Lab 3.0 is a beta release (isaaclab==3.0.0b2.post1) that pulls in
+# other pre-release pins (e.g. tinyobjloader==2.0.0rc13); NVIDIA's own install
+# docs require both of these flags for the same reason.
+prerelease = "allow"
+index-strategy = "unsafe-best-match"
 
 [tool.uv.extra-build-dependencies]
 isaacsim-kernel = ["wheel-stub"]

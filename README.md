@@ -1,17 +1,14 @@
 # isaac_ws
 
-isaacsim: 5.1.0
-isaaclab: 2.3.0
+isaacsim: 6.0.1.0
+isaaclab: 3.0.0-beta2 (post1)
 
 ```bash
 uv sync --refresh --preview-features extra-build-dependencies
 ```
 
-## 5090 torch
-```bash
-uv pip uninstall torch torchvision torchaudio
-uv pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128
-```
+torch/torchvision are pinned to the cu128 build (2.11.0 / 0.26.0) via `tool.uv.sources`
+in `source/isaaclab_extension/pyproject.toml`, so no manual reinstall step is needed.
 
 ## non-display
 ```bash

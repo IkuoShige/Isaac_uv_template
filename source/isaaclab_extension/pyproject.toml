@@ -3,22 +3,20 @@ name = "isaaclab_extension"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.11,<3.12"
+requires-python = ">=3.12,<3.13"
 dependencies = [
   "setuptools<75",
-  "flatdict==4.0.1",
-  "torch",
-  "torchvision",
-  "isaacsim[all,extscache]==5.1.0",
-  "isaaclab[isaacsim,all]==2.3.0",
+  "flatdict==4.0.0",
+  "torch==2.11.0",
+  "torchvision==0.26.0",
+  "isaacsim[all,extscache]==6.0.1.0",
+  "isaaclab[isaacsim,all]==3.0.0b2.post1",
   # isaaclab's wheel bundles its sub-packages' source under
   # site-packages/isaaclab/source/ but does not install them as importable
   # dists. Pull isaaclab_tasks straight from the matching IsaacLab git tag
   # (subdirectory build) so `import isaaclab_tasks` works after a plain
   # `uv sync` — no post-sync editable-install script required.
   "isaaclab_tasks",
-  # mjviser (MuJoCo-in-viser renderer) pulls mujoco + viser + trimesh.
-  "mjviser",
   "pip",
 ]
 
@@ -30,11 +28,20 @@ build-backend = "setuptools.build_meta"
 [tool.uv.sources]
 isaacsim = { index = "nvidia" }
 isaaclab = { index = "nvidia" }
-isaaclab_tasks = { git = "https://github.com/isaac-sim/IsaacLab.git", subdirectory = "source/isaaclab_tasks", tag = "v2.3.0" }
+isaaclab_tasks = { git = "https://github.com/isaac-sim/IsaacLab.git", subdirectory = "source/isaaclab_tasks", tag = "v3.0.0-beta2.patch1" }
+# Isaac Lab 3.0 pins torch 2.11.0 (cu128 on x86_64); pull it from PyTorch's
+# own index instead of PyPI so the wheel matches the CUDA runtime.
+torch = { index = "pytorch-cu128" }
+torchvision = { index = "pytorch-cu128" }
 
 [[tool.uv.index]]
 name = "nvidia"
 url = "https://pypi.nvidia.com"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
 explicit = true
 
 [tool.uv.extra-build-dependencies]
