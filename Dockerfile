@@ -13,6 +13,9 @@ ENV PYTHONUNBUFFERED=1
 # images default to compute,utility only, so request it explicitly here.
 ENV NVIDIA_VISIBLE_DEVICES=all
 ENV NVIDIA_DRIVER_CAPABILITIES=all
+# Keep the shell on UTF-8 so bash/readline don't mangle typed Japanese text.
+ENV LANG=C.UTF-8
+ENV LC_ALL=C.UTF-8
 
 # システムパッケージ: ランタイム共有ライブラリ + sdist ビルド用の build-essential
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -55,6 +58,11 @@ COPY . .
 # 19GB の .venv だけを残す。--mount により /root/.cache/uv はイメージに焼かれない。
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --refresh --preview-features extra-build-dependencies
+
+# workspace の venv を cwd に関係なく解決させる（サブディレクトリの workspace member
+# から素の `python`/`pip` を叩いても uv run を挟まず正しい venv に当たるようにする）
+ENV VIRTUAL_ENV=/workspace/.venv
+ENV PATH="/workspace/.venv/bin:${PATH}"
 
 # デフォルトコマンド
 CMD ["bash"]

@@ -1,6 +1,9 @@
 [tool.uv.workspace]
 members = [
-  "source/isaaclab_extension"
+  "source/isaaclab_extension",
+  # RL training repos cloned into source/ (see launch.sh's source/ mount) get
+  # added here so `uv sync` installs them into the shared /workspace/.venv:
+  # "source/unitree_rl_lab",
 ]
 
 [tool.uv]
